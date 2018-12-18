@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>抓取排名</title>
+  <script src="lib/jquery-3.3.1.js"></script>
+  <script src="lib/bootstrap.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/rewardrecord.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <style type="text/css">
+
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="title">娃娃达人</div>
+    <div class="topthree">
+      <div class="medal-con copper">
+        <div class="medal">
+          <div class="avatar avatar3">
+            <img src="" alt="">
+          </div>
+        </div>
+        <div class="username"></div>
+        <div class="time"></div>
+      </div>
+      <div class="medal-con  gold">
+        <div class="medal">
+          <div class="avatar avatar1">
+            <img src="" alt="">
+          </div>
+        </div>
+        <div class="username"></div>
+        <div class="time"></div>
+      </div>
+      <div class="medal-con silver">
+        <div class="medal">
+          <div class="avatar avatar2">
+            <img src="" alt="">
+          </div>
+        </div>
+        <div class="username"></div>
+        <div class="time"></div>
+      </div>
+    </div>
+    <div class="catch_content rounded-top" style="margin-top: 0;">
+      <div id="catch" class="catch_detail collapse show">
+        <!--<div class="navBtn d-flex justify-content-around navigation-list">
+              <div id="toCatchRecords" class=" text-center navigation-item inline-top active" style="font-size: 1.6rem;">
+                  <a class="navigation-link">
+                      抓中记录
+                  </a>
+              </div>
+              <div id="toDollInfo" class=" text-center navigation-item inline-top" style="font-size: 1.6rem;">
+                  <a class="navigation-link">
+                      抓取排名
+                  </a>
+              </div>
+          </div>-->
+        <div class="catch_records">
+          <!-- <div class="catch_record">
+            <div class="catch_index">4</div>
+            <div class="catch_avatar">
+              <img src="" alt="">
+            </div>
+            <div class="catch_user">李靖</div>  
+            <div class="catch_time">1次</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/_common.js"></script>
+  <script src="js/moment.js"></script>
+  <script>
+    //获取娃娃机ID
+    const id = getParamFromUrl('id');
+    //娃娃抓取记录
+    const getRecords = async function () {
+      return new Promise((resolve, reject) => {
+        let ajaxSetting = {
+          type: 'get',
+          url: _SG['apiPreUrl'] + '/home/selectCaptureRecordByMcId?id=' + id + '&num=1&size=50&getType=3',
+          contentType: "application/json;charset=UTF-8",
+          success: async function (rs) {
+            let res = rs.result.list,
+            html = '';
+            // 渲染头像
+            let arr = res.splice(0,3)
+            // console.log(res)
+
+            // 渲染列表
+            if (_SG.isReplyOk(rs)) {
+              $.each(res, (i, e) => {
+                // let formatTime = formatDateTime(e.gameTime);
+                html += 
+                `<div class="catch_record">
+                  <div class="catch_index">${i+4}</div>
+                  <div class="catch_avatar">
+                    <img src="${e.userPic}" alt="">
+                  </div>
+                  <div class="catch_user">${e.nickName}</div>  
+                  <div class="catch_time">${e.gameTime}次</div>
+                </div>`
+              });
+              $('.catch_records').html(html);
+            } else {
+              console.log(rs.desc);
+            }
+            $('.avatar1 img').attr('src',arr[0].userPic)
+            $('.gold .username').text(arr[0].nickName)
+            $('.gold .time').text(arr[0].gameTime+'次')
+            $('.avatar2 img').attr('src',arr[1].userPic)
+            $('.silver .username').text(arr[1].nickName)
+            $('.silver .time').text(arr[1].gameTime+'次')
+            $('.avatar3 img').attr('src',arr[2].userPic)
+            $('.copper .username').text(arr[2].nickName)
+            $('.copper .time').text(arr[2].gameTime+'次')
+            resolve(res);
+          },
+          error: function (err) {
+            console.log(err);
+            reject(err);
+          }
+        };
+        processCrossAjax(ajaxSetting);
+      })
+    }
+    getRecords();
+
+    //时间处理
+    function formatDateTime(timeMinute) {
+      let result = "";
+      if (timeMinute < 1) {
+        result = "1分钟内";
+      } else if (timeMinute < 60) {
+        result = Math.floor(timeMinute) + "分钟前";
+      } else if (timeMinute / 60 <= 24) {
+        result = Math.floor(timeMinute / 60) + "小时前";
+      } else {
+        let timeMs = timeMinute * 60 * 1000;
+        let today = new Date();
+        let todayMs = today.getTime();
+        let thenMs = todayMs - timeMs;
+        let thenTime = new Date();
+        thenTime.setTime(thenMs);
+        let year = 0,
+          month = 0,
+          date = 0,
+          hour = 0,
+          minute = 0;
+        year = thenTime.getFullYear();
+        month = thenTime.getMonth() + 1;
+        date = thenTime.getDate();
+        hour = thenTime.getHours();
+        minute = thenTime.getMinutes();
+        if (minute < 10) {
+          minute = '0' + minute;
+        }
+        if (hour < 10) {
+          hour = '0' + hour;
+        }
+        result = year + '-' + month + '-' + date + ' ' + hour + ':' + minute;
+      }
+      return result;
+    }
+  </script>
+</body>
+
+</html>

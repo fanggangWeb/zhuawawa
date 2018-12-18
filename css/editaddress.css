@@ -1,0 +1,95 @@
+body,html{
+    width: 100%;
+    max-width: 640px !important;
+    margin: auto !important;
+}
+@charset "UTF-8";
+html{
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 17px;
+}
+html,body {
+	-webkit-touch-callout:none;
+	-webkit-text-size-adjust:none;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+body {
+	line-height: 1.5;
+	color: #212121;
+	background-color: #f5f5f5;
+	outline: 0;
+}
+html,body,header,section,footer,div,ul,ol,li,img,a,span,em,del,legend,center,strong,var,fieldset,form,label,dl,dt,dd,cite,input,hr,time,mark,code,figcaption,figure,textarea,h1,h2,h3,h4,h5,h6,p{
+	margin:0;
+	border:0;
+	padding:0;
+	font-style:normal;
+}
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	outline: none;
+}
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 19.2px !important;
+	}
+}
+@media only screen and (min-width: 375px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+@media only screen and (min-width: 412px) {
+	html {
+		font-size: 22px !important;
+	}
+}
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 25.6px !important;
+	}
+}
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 34px !important;
+	}
+}
+.weui-cells__title{
+    font-size: 14px;
+    color: #333333;
+    padding-top: 15px;
+    margin-bottom: 0;
+    background: #ffffff;
+    margin-top: 0;
+}
+
+
+.weui-cell__bd{
+    padding-left: 10px;
+    background: #f2f4f4;
+    border-radius: 4px;
+}
+.weui-input{
+    height: 35px;
+    font-size: 14px;
+}
+.weui-textarea{
+    background: #f2f4f4;
+    font-size: 14px;
+}
+.weui-cells:after, .weui-cells:before,.weui-cell:before{
+    display: none;
+}
+.goodsdetail-goodsdetail-sure {
+	position: fixed;
+	width: 100%;
+	max-width: 640px;
+    margin: auto;
+    height: 54px;
+    text-align: center;
+    line-height: 54px;
+    background: #FFA400;
+    font-size: 18px;
+    color: #FFFFFF;
+}

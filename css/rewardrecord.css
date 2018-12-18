@@ -1,0 +1,124 @@
+*{
+  margin:0;
+  padding:0;
+  border: none;
+}
+html,body{
+  font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+  font-size: 62.5%;
+  text-decoration: none;
+  height: 100%;
+}
+.content {
+  width: 100%;
+  height: 100%;
+  background-image: url(../img/BG.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  overflow-y: auto;
+}
+.title {
+  font-size: 1.6rem;
+  color: white;
+  text-align: center;
+  height: 3rem;
+  line-height: 3rem;
+  margin-bottom: 60px;
+}
+.topthree {
+  width: 90%;
+  height: 90px;
+  margin-left: 5%;
+  background: #fff;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+}
+.medal-con {
+  position: relative;
+  float: left;
+  text-align: center;
+  top: -3.1rem;
+  width: 5.2rem;
+  height: 11rem;
+}
+.username {
+  width: 100%;
+  margin-top: 0.6rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+}
+.time {
+  font-size: 0.6rem;
+  color: rgb(126,126,126);
+}
+.medal {
+  width: 5.2rem;
+  height: 6.25rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.copper .medal {
+  background-image: url(../img/copper.png);
+}
+.silver .medal {
+  background-image: url(../img/silver.png);
+}
+.gold .medal {
+  background-image: url(../img/gold.png);
+}
+.avatar {
+  position: relative;
+  top: 2.09rem;
+  left: 0.95rem;
+  width: 3.3rem;
+  height: 3.3rem;
+  border-radius: 3.3rem;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+.catch_content{
+  width: 90%;
+  height: 60%;
+  margin-left: 5%;
+  margin-top: 4.4rem;
+  background:#fff ;
+  padding:0 1rem;
+  position: relative;
+  overflow-y: auto; 
+}
+.catch_record {
+  width: 96%;
+  height: 4rem;
+  margin: 0 auto;
+  font-size: 1.4rem;
+  border-bottom: 0.1rem solid #eee;
+  display: flex;
+  align-items: center;
+}
+.catch_index {
+  width: 2rem;
+}
+.catch_avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2.5rem;
+  margin-left: 1rem;
+}
+.catch_avatar img {
+  width: 100%;
+  height: 100%;
+}
+.catch_user {
+  margin-left: 1rem;
+}
+.catch_time {
+  margin-left: auto;
+  color: rgb(126,126,126);
+}

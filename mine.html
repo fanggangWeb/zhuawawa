@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的</title>
+    <script src="lib/jquery-3.3.1.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script src="lib/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="css/mine.css">
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+<div class="bg">
+    <div class="d-flex">
+        <div id="header" class="d-flex text-center align-items-center w-100">
+            <div class="avatar ">
+
+            </div>
+        </div>
+    </div>
+    <div id="detail" class="d-flex flex-column">
+		<div class="my_collect d-inline-block d-inline-flex">
+            <i class="icon_my_collect"></i>
+           	<div class="d-inline-block mr-auto">收藏</div>
+            <div class="d-inline-block"></div>
+            <i class="icon_expand"></i>
+         </div>
+         <div class="my_coupons d-inline-block d-inline-flex">
+            <i class="icon_my_coupons"></i>
+           	<div class="d-inline-block mr-auto">优惠券</div>
+            <div class="d-inline-block"></div>
+            <i class="icon_expand"></i>
+         </div>
+         <div class="my_address d-inline-block d-inline-flex">
+            <i class="icon_my_address"></i>
+           	<div class="d-inline-block mr-auto">地址管理</div>
+            <div class="d-inline-block"></div>
+            <i class="icon_expand"></i>
+         </div>
+         <div class="my_opinion d-inline-block d-inline-flex">
+            <i class="icon_my_opinion"></i>
+           	<div class="d-inline-block mr-auto">意见反馈</div>
+            <div class="d-inline-block"></div>
+            <i class="icon_expand"></i>
+         </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div id="controls" class="fixed-bottom bg-white d-flex justify-content-around">
+        <div id="index_play" class="text-center nav-link" onclick="location.href='index.html'">
+            <img src="img/home.png" alt="">
+            <div>抓娃娃</div>
+        </div>
+        <div id="index_mine" class="text-center nav-link">
+            <img src="img/mine_active.png" alt="">
+            <div>我的</div>
+        </div>
+    </div>
+</div>
+<script src="js/_common.js"></script>
+<script src="js/mine.js"></script>
+</body>
+</html>

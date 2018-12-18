@@ -1,0 +1,116 @@
+*{
+  margin:0;
+  padding:0;
+  border: none;
+}
+html,body{
+  font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+  font-size: 62.5% !important;
+  text-decoration: none;
+  height: 100%;
+}
+a{
+  text-decoration: none;
+  color: #ccc;
+}
+a:active{
+  text-decoration: none;
+}
+.content {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f4ff;
+  overflow-y: auto;
+}
+.tab-bar {
+  width: 100%;
+  height: 5rem;
+  font-size: 1.5rem;
+  background: white;
+  display: flex;
+}
+.tab {
+  text-align: center;
+  line-height: 5rem; 
+  flex: 1;
+  color: rgb(200, 200, 200)
+}
+.tab.active {
+  color: rgb(255,79,91);
+}
+.tab.active::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  margin-left: calc(50% - 2rem);
+  background: rgb(255,79,91);
+}
+.coupon-list {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1.5rem 2.5rem; 
+}
+.coupon {
+  box-sizing: border-box;
+  width: 100%;
+  height: 11rem;
+  padding: 1rem 0;
+  background: white;
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+.coupon-left {
+  box-sizing: border-box;
+  width: 35%;
+  height: 100%;
+  border-right: 1px dashed rgb(231,231,231); 
+}
+.number {
+  font-size: 2.3rem;
+  height: 50%;
+  color: #ed2c59;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  -webkit-justify-content: center;
+  -webkit-align-items: flex-end;
+}
+.icon {
+  font-size: 1rem;
+  margin-bottom: 7px;
+}
+.name {
+  height: 50%;
+  color: #ed2c59;
+  font-size: 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  -webkit-justify-content: center;
+  -webkit-align-items: flex-start;
+}
+.coupon-right {
+  box-sizing: border-box;
+  width: 65%;
+  height: 100%;
+  color: rgb(168,168,168);
+  font-size: 1.2rem;
+}
+.condition, .date {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  padding-left: 5%;
+}
+.condition {
+  align-items:flex-end;
+  -webkit-align-items:flex-end;
+}
+.date {
+  align-items:flex-start;
+  -webkit-align-items:flex-start;
+}

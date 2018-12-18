@@ -1,0 +1,121 @@
+body,html{
+    width: 100%;
+    max-width: 640px !important;
+    margin: auto !important;
+}
+@charset "UTF-8";
+html{
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 17px;
+}
+html,body {
+	-webkit-touch-callout:none;
+	-webkit-text-size-adjust:none;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+body {
+	line-height: 1.5;
+	color: #212121;
+	background-color: #f5f5f5;
+	outline: 0;
+}
+html,body,header,section,footer,div,ul,ol,li,img,a,span,em,del,legend,center,strong,var,fieldset,form,label,dl,dt,dd,cite,input,hr,time,mark,code,figcaption,figure,textarea,h1,h2,h3,h4,h5,h6,p{
+	margin:0;
+	border:0;
+	padding:0;
+	font-style:normal;
+}
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	outline: none;
+}
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 19.2px !important;
+	}
+}
+@media only screen and (min-width: 375px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+@media only screen and (min-width: 412px) {
+	html {
+		font-size: 22px !important;
+	}
+}
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 25.6px !important;
+	}
+}
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 34px !important;
+	}
+}
+.weui-cells{
+	margin-top: 0.5rem;
+}
+.buycar-nogoods{
+    padding-top:5rem;
+}
+.buycar-nogoods img{
+    width: 6rem;
+    display: block;
+    margin: auto;
+}
+.addresslist-personmsg{
+    padding: 0.85rem 0.75rem 0 !important;
+}
+.addresslist-personmsg .weui-cell__bd{
+    font-size: 0.7rem;
+    color: #333333;
+}
+.addresslist-personmsg .weui-cell__ft{
+    font-size: 0.7rem;
+    color: #333333;
+}
+.addresslist-address{
+    font-size: 0.7rem;
+    color: #999999;
+    line-height: 0.85rem;
+    margin-top: 0.25rem;
+    padding: 0 0.75rem 0.8rem;
+    border-bottom: 1px solid #dddddd;
+}
+.addresslist-set .weui-cell__bd{
+    font-size: 0.7rem;
+    color: #333333;
+}
+.addresslist-set .weui-cell__ft{
+    font-size: 0.7rem;
+    color: #333333;
+}
+.addresslist-set .weui-cell__ft img{
+    width: 0.7rem;
+    margin-right: 0.15rem;
+}
+.addresslist-add{
+    margin: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    width: 9rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #FFA400;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: 1px solid #FFA400;
+}
+.showajax{
+    opacity: 1;
+}
+.hideajax{
+    opacity: 0;
+    display: none;
+}

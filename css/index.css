@@ -1,0 +1,150 @@
+*{
+    margin:0;
+    padding:0;
+    border: none;
+}
+html,body{
+    font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+    font-size: 62.5% !important;
+    text-decoration: none;
+    height: 100%;
+}
+a{
+    text-decoration: none;
+    color: #ccc;
+}
+a:active{
+    text-decoration: none;
+}
+.cl_y{
+    color:#fd9202;
+}
+.fb{
+    font-weight: 600;
+}
+nav{
+    font-size: 1.2rem;
+    width: 100%;
+}
+.flex{
+    display: flex;
+}
+.img-container{
+    font-size:1rem;
+    padding: 1rem;
+}
+.machine{
+    position: relative;
+    /*width: 45%;*/
+    font-size: 1.2rem;
+}
+.icon_coin{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.machine>img{
+    width: 17rem;
+    height: 14rem;
+}
+.w-40{
+    width: 40%;
+}
+#controls{
+ font-size: 1.4rem;
+}
+
+#index_play img{
+    width: 3rem;
+    height: 2rem;
+}
+#index_mine img{
+    width: 2rem;
+    height: 2rem;
+}
+.carousel-item>img{
+    /* height: 17.7rem; */
+    height: 212px;
+}
+
+.none{
+    display: none;
+}
+.status{
+    position: absolute;
+    right:0.8rem;
+    bottom:2rem;
+    border-radius: 2px;
+    color: #fff;
+    opacity: .8;
+}
+.content_even{
+    justify-content: space-evenly;
+}
+.bg-free{
+    background: #69ea81;
+}
+.bg-busy{
+    background: #ee855b;
+}
+.index-mask{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1500;
+	background: rgba(0,0,0,0.6);
+}
+.index-qiandao{
+	position: fixed;
+	z-index: 2000;
+	width: 300px;
+	left: 50%;
+	margin-left: -150px;
+	height: 360px;
+	top: 50%;
+	margin-top: -180px;
+}
+.index-qiandao-content{
+	width: 100%;
+	height: 256px;
+	background-image:url(../img/qiandao.png); 
+	background-repeat:no-repeat; 
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+}
+.sixdaysbefore{
+	padding-left: 68px;
+	padding-top: 94px;
+}
+.sixdaysbefore-item{
+	width: 38px;
+	height: 38px;
+	float: left;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fd9202;
+	font-size: 12px;
+	margin-right: 32px;
+	margin-bottom: 34px;
+	border-radius: 100px;
+}
+.sixdaysbefore-item img,.seventhday img{
+	width: 12px;
+}
+.seventhday{
+	height: 14px;
+	margin-top: 16px;
+	float: right;
+	margin-right: 50px;
+	display: flex;
+	align-items: center;
+	color: #fd9202;
+	font-size: 12px;
+}
+.qiandaobtn{
+	width: 160px;
+	display: block;
+	margin: auto;
+}

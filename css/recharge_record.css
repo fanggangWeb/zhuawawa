@@ -1,0 +1,76 @@
+body,html{
+    font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+    font-size: 62.5%;
+    text-decoration: none;
+    height: 100%;
+}
+.bg{
+    background-image: url(../img/BG.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height:100%;
+    padding:1rem 1rem 0;
+}
+.top {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.number {
+  color: rgb(230,251,98);
+}
+.name {
+  color: white;
+  margin-bottom: 1rem;
+}
+.content{
+  height: 80%;
+  background: white;
+  font-size: 1.4rem;
+  border-radius: 10px;
+}
+.tab {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  background: rgb(242,253,255);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  height: 100%;
+  line-height: 4rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.tab-item.active {
+  color: rgb(255,79,91);
+}
+.records-content {
+  height: calc(100% - 4rem);
+  overflow-y: auto;
+}
+.records{
+  width: 96%;
+  margin: 0 auto;
+  border-bottom: 0.1rem solid #eee;
+  font-size: 1.3rem;
+  padding: 1rem 1rem;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+.charge_detail{
+  display: inline-block;
+}
+.charge_amount{
+  font-size: 1.6rem;
+  display: inline-block;
+  vertical-align: center;
+  color: rgb(118,252,117)
+}
+.consume-amount {
+  color: rgb(255,79,91)
+}

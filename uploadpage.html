@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <title>下载链接</title>
+    <link rel="stylesheet" href="css/weui.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="css/uploadpage.css" />
+    <link rel="stylesheet" href="./css/common.css">
+    <style type="text/css">   	
+    </style>
+</head>
+<body>
+<div id="downloadlinkdata">
+	<!--<div class="downloadlinkroles">
+		1.下载安卓APP复制链接在浏览器中打开<br>
+		2.下载苹果APP请前往APP Store 下载<br>
+	</div>
+	<img class="fuzhilianjie" src="img/button_order.png" @click="fuzhilianjie" />-->
+</div>
+<script src="lib/jquery-3.3.1.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/vue.js" ></script>
+<script src="js/_common.js"></script>
+<script type="text/javascript">
+	var vm;
+    $(function(){
+        vm = new Vue({
+            el:"#downloadlinkdata",
+            data: {
+            	
+            },
+            methods:{
+				fuzhilianjie:function(){
+					var oInput = document.createElement('input');
+			        oInput.value = "https://a.app.qq.com/o/simple.jsp?pkgname=com.ly.asd.zww&fromcase=40003";
+			        document.body.appendChild(oInput);
+			        oInput.select(); // 选择对象
+			        document.execCommand("Copy"); // 执行浏览器复制命令
+			        oInput.className = 'oInput';
+			        oInput.style.display='none';
+			        alert("复制成功");
+				}
+            },
+            created:function(){
+            	_SG.user.clearInfo();
+            	var code = getParamFromUrl("code");
+            	var inviteCode = getParamFromUrl("state");
+            	var urls = _SG['apiPreUrl']+'/login?wxCode='+code+'&weixinLogin=1'+'&inviteCode='+inviteCode;
+            	$.ajax({
+				    type: 'post',
+				    url: urls,
+				    contentType: "application/json;charset=UTF-8",
+				    success:function (rs) {
+				        if(_SG.isReplyOk(rs)){
+				            window.location.href = "https://a.app.qq.com/o/simple.jsp?pkgname=com.ly.asd.zww&fromcase=40003";
+				        }else{
+				            alert(rs.desc)
+				        }
+				    }
+				})
+            }
+        })
+    })
+</script>
+</body>
+</html>
+
+
+

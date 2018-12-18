@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <title>意见反馈</title>
+    <link rel="stylesheet" href="css/weui.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="css/feedback.css" />
+    <link rel="stylesheet" href="./css/common.css">
+    <style type="text/css">
+    	
+    </style>
+</head>
+<body style="background: #F6F6F6;">
+<div id="feedbackdata">
+	<div style="height: 0.5rem;"></div>
+	<textarea v-model="content" class="weui-textarea feedback-content" placeholder="请详细描述您的问题和建议，我们将及时跟进和解决"></textarea>
+	<div class="feedback_upload_content">
+		<div class="imgs_content" v-for="(item,index) in imglist">
+			<div class="showimgs">
+				<img :src="item" />
+			</div>
+			<img src="img/icon_delete.png" class="deleteimg" @click="deleteindeximg(index)" />
+		</div>
+		<div class="imgs_content">
+			<img src="img/icon_pic.png" class="uploadimg" />
+			<input class="uploadinput" onchange="getFormData(event)" type="file" accept='image/*' />
+		</div>
+		
+		<div style="clear: both;"></div>
+	</div>
+	<div class="feedback-contact weui-cell">
+		<div class="weui-cell__hd">联系方式：</div>
+		<div class="weui-cell__bd">
+			<input class="weui-input" v-model="phone" placeholder="（选填、方便我们联系您）" />
+		</div>
+	</div>
+	<div class="submitsure" @click="submitdata">确认</div>
+	<div style="height: 1rem;"></div>
+</div>
+<script src="lib/jquery-3.3.1.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/vue.js" ></script>
+<!--<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>-->
+<script src="js/_common.js"></script>
+<script type="text/javascript">
+	var vm;
+    $(function(){
+        vm = new Vue({
+            el:"#feedbackdata",
+            data: {
+            	imglist:[],
+            	content:'',
+            	phone:'',
+            	fileUploadList:[]
+            },
+            methods:{
+				deleteindeximg:function(index){
+					this.imglist.splice(index,1);
+					this.fileUploadList.splice(index,1);
+				},
+				submitdata:function(){
+					if(this.content==""){
+                		alert("请输入反馈内容");
+                		return false;
+                	}else{
+                		var urls;
+                		if(this.fileUploadList.length>0){
+                			urls = _SG['apiPreUrl']+'/feedback/insertFeedback?content='+this.content+'&phone='+this.phone+'&fileUploadList='+JSON.stringify(this.fileUploadList);
+                		}else{
+                			urls = _SG['apiPreUrl']+'/feedback/insertFeedback?content='+this.content+'&phone='+this.phone
+                		}
+                		processCrossAjax({
+						    type:'post',
+						    url:urls,
+						    contentType:"application/json;charset=UTF-8",
+						    success:function (rs) {
+						        if(_SG.isReplyOk(rs)){
+						        	setTimeout(function(){
+						        		window.history.back();
+						        		location.reload();
+						        	},1500)
+						        }
+						    }
+						})
+                	}
+				}
+            }
+        })
+    })
+    function getFormData(e){
+		var imgFile = e.target.files[0]; //获取图片文件
+		var formData = new FormData();  // 创建form对象
+		formData.append('file', imgFile);  // 通过append向form对象添加数据
+		$.ajax({
+		    url: _SG['apiPreUrl']+'/file/upload', //请求的接口地址
+		    type: 'POST',
+		    cache: false, //上传文件不需要缓存
+		    data: formData,
+		    processData: false, // 不要去处理发送的数据
+		    contentType: false, // 不要去设置Content-Type请求头
+		    success: function(data){
+		        var newimg = "http://"+data.result.url;
+		        vm.imglist.push(newimg);
+		        var uploadimg = {};
+		        uploadimg.fileName = data.result.fileName;
+		        uploadimg.filePath = data.result.filePath;
+		        uploadimg.fileSize = data.result.fileSize;
+		        uploadimg.fileType = data.result.fileType;
+		        vm.fileUploadList.push(uploadimg);
+		    },
+		    error: function(err){
+		        alert(err)
+		    }
+		})
+    }
+</script>
+</body>
+</html>
+
+
+

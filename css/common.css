@@ -1,0 +1,17 @@
+.weui-toast{
+  width: 12em !important;
+  padding: 0 10px !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 1px;
+}
+#controls {
+  background-image: url(../img/bottom.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+html,body {
+  font-size: 62.5% !important;
+}
+.weui-pull-to-refresh__layer {
+  height: 50px !important;
+}

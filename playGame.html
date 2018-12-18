@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>进入房间</title>
+  <script src="lib/jquery-3.3.1.js"></script>
+  <script src="lib/bootstrap.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/playGame.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link href="css/video.css?v=bcd2ce1385" rel="stylesheet">
+
+  <style type="text/css">
+  </style>
+</head>
+
+<body>
+  <div class="winnerdetail">
+    <div class="catch_content rounded-top" style="margin-top: 0;">
+      <div id="catch" class="catch_detail collapse show">
+        <div class="navBtn d-flex justify-content-around navigation-list">
+          <!--<div id="toCatchRecords" class=" text-center navigation-item inline-top active">
+	                    <a class="navigation-link">
+	                        抓中记录
+	                    </a>
+	                </div>-->
+          <div id="toDollInfo" class=" text-center navigation-item inline-top" style="font-size: 1.6rem;">
+            <a class="navigation-link">
+              娃娃详情
+            </a>
+          </div>
+        </div>
+        <!--<div class="catch_records d-none" style="overflow-y: auto;">
+	            </div>-->
+        <div class="doll_info" style="overflow-y: auto;">
+        </div>
+      </div>
+    </div>
+    <div class="startgame" id="entergame">进入抓娃娃</div>
+  </div>
+  <div class="bg" style="padding: 0;">
+    <div id="livePlayer">
+      <!--<div id="live" class="w-100" style="height: 40rem;">
+        </div>-->
+      <video id="roomVideo" class="video-js vjs-default-skin vjs-big-play-centered" x-webkit-airplay="true" poster=""
+        autoplay x5-video-player-type="h5" x5-video-player-fullscreen="true" playsinline webkit-playsinline="true" width="100%" height="100%" preload="auto">
+        <source src="http://22679.liveplay.myqcloud.com/live/22679_b508d3cb47c411e892905cb9018cf0d4.m3u8" type="application/x-mpegURL">
+      </video>
+      <button id="btn">play</button>
+      <i class="viewSwitch"></i>
+      <div class="watch" style="top:9rem;">
+        <i class="watch_bg"></i>
+        <div class="watch_content d-flex">
+          <div id="onLookers" class="d-inline-flex flex-column justify-content-center">
+            <span id="ol_amount"></span>
+            <div>围观<span id="machineName"></span></div>
+          </div>
+          <div id="ol_avatar" class="flex-fill d-flex align-items-center flex-nowrap">
+          </div>
+        </div>
+      </div>
+      <div id="gameCountdown" class="d-none">
+      </div>
+    </div>
+    <div class="torecord">
+      <img src="img/record.png" />
+    </div>
+    <img class="showwawalogo" src="img/wawadaren.png" />
+    <div class="collectwawa">
+      <img class="isnot" src="img/collect1.png" />
+      <img class="isok" src="img/collect2.png" />
+    </div>
+    <div class="controls">
+      <div class=" d-flex justify-content-between">
+        <div class="records text-nowrap">
+          <div class="d-flex"><span class="colored stroke_white mr-2">消费</span><span id="consumption"></span>
+          </div>
+          <div class="d-flex"><span class="colored stroke_white mr-2">剩余</span><span id="balance"></span></div>
+        </div>
+
+        <div class="status_panel">
+          <div id="reserve" class="status text-center d-none ">
+            <div id="reserve_content" class="status_content d-flex flex-column justify-content-center">
+              <div id="status_reserve" class="stroke_white">预约抓娃娃</div>
+              <div class="toWait"></div>
+            </div>
+          </div>
+          <div id="cancel" class="status text-center d-none ">
+            <div id="cancel_content" class="status_content d-flex flex-column justify-content-center">
+              <div id="status_cancel" class="stroke_white">取消预约</div>
+              <div class="toWait"></div>
+            </div>
+          </div>
+          <div id="start" class="status text-center d-none ">
+            <div id="start_content" class="status_content d-flex flex-column justify-content-center">
+              <div id="status_start" class="stroke_white">开始抓取</div>
+              <div class="toPay"><span></span>/每次</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="charge text-center d-flex flex-column text-nowrap" style="margin-right: 0.5rem;">
+          <div class="charge_btn stroke_white m-auto" style="padding: 0;">
+            <i class="btn-play btn-direction btn-top-up" style="position: inherit;display: block;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="playPanel container-fluid d-none">
+      <div class="play-btn d-flex row">
+        <div class="col-6">
+          <i class="btn-play btn-direction btn-up"></i>
+          <i class="btn-play btn-direction btn-down"></i>
+          <i class="btn-play btn-direction btn-left"></i>
+          <i class="btn-play btn-direction btn-right"></i>
+        </div>
+        <div class="col-6">
+          <i class="btn-play btn-go"></i>
+        </div>
+      </div>
+    </div>
+    <!-- <div id="pop_start" class="flex-column content_even d-none">
+      <span id="start_tilte" class="f16">开始游戏?</span>
+      <div class="f16">倒计时：<span id="countdown"></span> 秒</div>
+      <div class="flex mt-5">
+        <button id="confirm" class="f14 rounded p-2">确认</button>
+        <button id="giveUp" class="f14 rounded p-2">取消</button>
+      </div>
+    </div> -->
+    <!-- 倒计时动画 -->
+    <div class="cutDown popup">
+      <div class="time">
+        <img src="" alt="">
+      </div>
+    </div>
+  </div>
+  <!-- 提醒去充值的弹框 -->
+  <div class="recharge popup">
+    <div class="recharge-con">
+      <div class="closed"></div>
+      <div class="recharge-desc">
+        您的余额为<span class="lavecoin">0</span>,请先去充值
+      </div>
+      <div class="recharge-btn">
+        <div class="btn-charge re-btn"></div>
+        <div class="btn-giveup re-btn"></div>
+      </div>
+    </div>
+  </div>
+  <!-- 提醒抓取成功的 -->
+  <div class="capture-success popup">
+    <div class="capture-con success-con">
+      <div class="capture-btn">
+        <div class="onemore cap-btn"></div>
+        <div class="relax cap-btn"></div>
+      </div>
+      <div class="cap-close"></div>
+    </div>
+  </div>
+  <!-- 提醒抓取失败的 -->
+  <div class="capture-fail popup">
+    <div class="capture-con fail-con">
+      <div class="capture-btn">
+        <div class="onemore cap-btn"></div>
+        <div class="relax cap-btn"></div>
+      </div>
+      <div class="cap-close"></div>
+    </div>
+  </div>
+  <!--<script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js" charset="utf-8"></script>;-->
+  <script src="js/_common.js"></script>
+  <script src="js/moment.js"></script>
+  <script src="js/video.js?v=fc5104a2ab23"></script>
+  <script src="js/videojs-contrib-hls.js?v=c726b94b9923"></script>
+  <script src="js/playGame.js"></script>
+  <script>
+    //	wx.ready(function () {
+    //	    alert(123);
+    //	    wx.getNetworkType({
+    //	        success: function (res) {
+    //	            myPlayer.play();
+    //	            alert(456);
+    //	        }
+    //	    });
+    //	});
+    var widheight = $("body").height();
+    setTimeout(function () {
+      $(".doll_info").css("height", widheight - 86 + 'px');
+    }, 10)
+  </script>
+</body>
+
+</html>

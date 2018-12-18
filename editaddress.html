@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <title>编辑我的收货地址</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="css/weui.css" />
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="css/editaddress.css" />
+    <style type="text/css">
+        
+    </style>
+</head>
+<body style="background: #f8f8f8;">
+<div id="addresseditdata">
+    <div class="weui-cells__title">填写收货信息</div>
+    <div class="weui-cells weui-cells_form" style="margin-top: 0 !important;">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" v-model="name" type="text" placeholder="请输入收货人姓名">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" v-model="phone" type="tel" placeholder="请输入收货人手机号码">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd" style="padding: 5px 10px;">
+                <textarea class="weui-textarea" rows="3" v-model="address" placeholder="详细地址、街道、小区、单元、门牌号"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="goodsdetail-goodsdetail-sure" @click="saveaddress">
+       	确认
+    </div>
+</div>
+<script src="lib/jquery-3.3.1.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/vue.js" ></script>
+<script src="js/_common.js"></script>
+
+<script type="text/javascript">
+    var vm=null;
+    $(function(){
+    	var id = getParamFromUrl('id');
+         vm = new Vue({
+            el:"#addresseditdata",
+            data: {
+                address:'',
+                name:'',
+                phone:''
+            },
+            methods:{
+                saveaddress:function(){
+                	if(this.name==""){
+                		alert("请输入收货人姓名");
+                		return false;
+                	}else if(!/^[1][3,4,5,7,8][0-9]{9}$/.test(this.phone)){
+                		alert("请输入正确的手机号码");
+                		return false;
+                	}else if(this.address==""){
+                		alert("请输入详细地址");
+                		return false;
+                	}else{
+                		if(id==""||id==null||id==undefined){
+            				processCrossAjax({
+							    type:'post',
+							    url:_SG['apiPreUrl']+'/address/addOrUpdateUserAddress?userName='+this.name+'&contactNumber='+this.phone+'&addressDetail='+this.address,
+							    contentType:"application/json;charset=UTF-8",
+							    success:function (rs) {
+							        if(_SG.isReplyOk(rs)){
+							        	setTimeout(function(){
+							        		window.history.back();location.reload();
+							        	},1500)
+							        }
+							    }
+							})
+            			}else{
+            				processCrossAjax({
+							    type:'post',
+							    url:_SG['apiPreUrl']+'/address/addOrUpdateUserAddress?userName='+this.name+'&contactNumber='+this.phone+'&addressDetail='+this.address+"&id="+id,
+							    contentType:"application/json;charset=UTF-8",
+							    success:function (rs) {
+							        if(_SG.isReplyOk(rs)){
+							        	setTimeout(function(){
+							        		window.history.back();location.reload();
+							        	},1500)
+							        }
+							    }
+							})
+            			}
+                		
+                	}
+                }
+            },
+            created:function(){
+            	if(id==""||id==null||id==undefined){
+            		
+            	}else{
+            		processCrossAjax({
+					    type:'get',
+					    url:_SG['apiPreUrl']+'/address/getUserAddressById?id='+id,
+					    contentType:"application/json;charset=UTF-8",
+					    success:function (rs) {
+					        console.log(rs,1111);
+					        if(_SG.isReplyOk(rs)){
+					        	vm.name = rs.result.userName;
+					        	vm.phone = rs.result.contactNumber;
+					        	vm.address = rs.result.addressDetail;
+					        }
+					    }
+					})
+            	}
+            }
+        });
+    })
+</script>
+</body>
+</html>

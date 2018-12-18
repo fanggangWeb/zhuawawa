@@ -1,0 +1,85 @@
+body,html{
+    font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+    font-size: 62.5%;
+    text-decoration: none;
+    height: 100%;
+}
+.bg{
+    background: #eff4fe;
+    height: 100%;
+}
+#top{
+    background: url("../img/pic_bill_background.png");
+    height:auto;
+}
+.my_coin{
+    margin: 0 auto;
+    padding:4rem 0 4rem 0;
+}
+.coin_amount{
+    font-size: 3rem;
+    color: #ffe405;
+}
+.coin_unit{
+    font-size: 1.2rem;
+    color: #fff;
+}
+.content{
+    margin: 1rem;
+    background: #fff;
+    /* height: 79%; */
+}
+.w-45{
+    width: 45%;
+}
+.meals{
+    text-align: center;
+    position: relative;
+    margin-top: 0.8rem;
+    /* height: 9rem; */
+}
+/* .meals img.w-100 {
+  width: 100% !important;
+  height: 100% !important;
+} */
+.pic_money{
+    width: 100%;
+    height:auto;
+}
+
+.deposit{
+    position: absolute;
+    top: 1.2rem;
+    left:30%;
+    color: #ed952f;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.money{
+    position: absolute;
+    bottom: 2.5rem;
+    left:40%;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.charge-btn{
+    display: block;
+    height:4rem;
+    line-height:4rem;
+    font-size: 1.6rem;
+    width: 80%;
+    margin:1rem auto 0;
+    background: #ee315b;
+    border-radius:1.6rem;
+    color: #fff;
+    border: none;
+}
+.selecttopup{
+	position: absolute;
+	z-index: 1;
+	right: 0.3rem;
+	top: 0.3rem;
+	display: block;
+	width: 2rem;
+}

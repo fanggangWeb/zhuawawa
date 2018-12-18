@@ -1,0 +1,552 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+html,
+body {
+  font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+  font-size: 62.5%;
+  text-decoration: none;
+  height: 100%;
+}
+
+.f12 {
+  font-size: 1.3rem;
+}
+
+.f14 {
+  font-size: 1.4rem;
+}
+
+.f16 {
+  font-size: 1.6rem;
+}
+
+.bg {
+  position: relative;
+  background-image: url(../img/BG.png); 
+  height: 100%;
+  padding: 1rem 1rem 0;
+}
+
+.img_container {
+  width: 100%;
+  height: 42.5rem;
+  background-color: #fff;
+  position: relative;
+}
+
+#livePlayer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#live {
+  height: 47.5rem;
+}
+
+.viewSwitch {
+  position: absolute;
+  background: url(../img/icon_shot.png) no-repeat;
+  background-size: 5rem 4.2rem;
+  top: 50%;
+  right: -1rem;
+  width: 6rem;
+  height: 4.2rem;
+  z-index: 200;
+}
+
+.watch {
+  position: absolute;
+  color: #FFF;
+  height: 4rem;
+  left: 3rem;
+  top: 2rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  padding: 0 2rem;
+}
+
+.watch_bg {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .4;
+  z-index: 0;
+  border-radius: 2rem;
+  background: #000;
+}
+
+.watch_content {
+  position: relative;
+  height: 100%;
+}
+
+.icon_top_avatar {
+  width: 3rem;
+  height: 3rem;
+  margin-left: 1.5rem;
+}
+
+.controls {
+  margin-top: 3.5rem;
+}
+
+.records {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.records>div {
+  padding: 0.5rem;
+}
+
+span.colored {
+  font-weight: bold;
+  text-shadow: 0 0 1rem #fd9202;
+}
+
+.status_panel {
+  display: flex;
+  flex-grow: 1;
+}
+
+.status {
+  width: 100%;
+}
+
+.status_content {
+  background: url(../img/btn_reserve.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.status>div:first-child {
+  padding: 1rem;
+}
+
+.charge {
+  background: url("../img/btn_charge.png") no-repeat;
+  background-size: contain;
+  background-position: center;
+
+}
+
+.charge_btn {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 1rem #fd9202;
+  padding: 2rem;
+}
+
+.catch_content {
+  margin-top: 4.4rem;
+  background: #fff;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.catch_record {
+  width: 96%;
+  margin: 0 auto;
+  font-size: 1.4rem;
+  border-bottom: 0.1rem solid #eee;
+  padding: 0.8rem 0;
+}
+
+.down_arrow {
+  background-image: url("../img/down_arrow.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 1rem;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+}
+
+#more_btn img {
+  width: 2.5rem;
+}
+
+.catch_record img {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.down_1 {
+  padding-top: 1rem;
+}
+
+.down_2 {
+  position: relative;
+  top: -0.4rem;
+  padding-bottom: 1rem;
+}
+
+.navBtn {
+  font-size: 1.2rem;
+  height: 3rem;
+  line-height: 3rem;
+}
+
+.stroke {
+  -webkit-text-stroke: 1px #fd9202;
+  -webkit-text-fill-color: transparent;
+}
+
+.stroke_white {
+  -webkit-text-stroke: 0.7px #fd9202;
+  -webkit-text-fill-color: white;
+}
+
+
+a {
+  color: #505050;
+}
+
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+.inline-top {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.navigation-item {
+  font-size: 1.2rem;
+}
+
+.navigation-link {
+  display: block;
+  position: relative;
+  padding: 0px 5px;
+  text-decoration: none;
+  color: #505050;
+  transition: color .2s ease-in-out;
+}
+
+.navigation-link:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  border-bottom: solid 2px;
+  transition: width .2s ease-in-out;
+}
+
+.navigation-link:hover {
+  color: #f23e80;
+}
+
+.navigation-link:hover:before {
+  width: 100%;
+}
+
+.toPay,
+.toWait {
+  color: #fd9202;
+  font-weight: normal;
+  font-size: 1.2rem;
+  height: 1.8rem;
+}
+
+.btn-play {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+}
+
+.btn-direction {
+  width: 6rem;
+  height: 6rem;
+}
+
+.btn-up {
+  background-image: url(../img/button_up.png);
+  top: 2rem;
+  left: 45%;
+}
+
+.btn-down {
+  background-image: url(../img/button_down.png);
+  top: 12rem;
+  left: 45%;
+}
+
+.btn-left {
+  background-image: url(../img/button_left.png);
+  top: 7rem;
+  left: 15%;
+}
+
+.btn-right {
+  background-image: url(../img/button_right.png);
+  top: 7rem;
+  left: 75%;
+}
+
+.btn-top-up {
+  background-image: url(../img/topup.png);
+}
+
+.btn-go {
+  background-image: url(../img/button_go.png);
+  width: 10rem;
+  height: 7rem;
+  top: 7rem;
+  left: 30%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#pop_start {
+  position: absolute;
+  width: 50%;
+  margin: auto;
+  z-index: 100;
+  left: 25%;
+  top: 25rem;
+  text-align: center;
+  background: rgba(169, 169, 169, 0.8);
+  padding: 3rem 0;
+  border-radius: 5px;
+}
+
+#countdown {
+  color: red;
+}
+
+#gameCountdown {
+  position: absolute;
+  padding: 3rem;
+  text-align: center;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: transparent;
+  color: red;
+  font-size: 4rem;
+}
+
+/* 从页面拿出来的 */
+video {
+  display: block;
+  /* margin-left: 5% !important; */
+  width: 100% !important;
+  height: 100% !important;
+  object-fit:fill !important;
+  /* border: 1px solid; */
+}
+.video-js, .vjs-no-js {
+  background-color: rgba(255,255,255,0) !important;
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin: 30px auto;
+  display: block;
+}
+
+.controls {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  bottom:4rem;
+  width: 100%;
+}
+
+.container-fluid {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  bottom: 20rem;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.winnerdetail {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.startgame {
+  height: 50px;
+  position: absolute;
+  z-index: 10000;
+  background: #9decf8;
+  line-height: 50px;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+.torecord {
+  position: absolute;
+  right: 1rem;
+  top: 13rem;
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
+}
+.torecord img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.showwawalogo {
+  position: absolute;
+  top: 8rem;
+  right: 1rem;
+  width: 50px;
+  text-align: center;
+  z-index: 9;
+}
+.collectwawa {
+  position: absolute;
+  z-index: 100;
+  right: 1rem;
+  top: 35%;
+}
+.collectwawa img {
+  width: 40px;
+  display: block;
+}
+.popup {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  z-index: 999;
+  background: rgba(162,162,162,0.45);
+}
+.time {
+  width: 12rem;
+  height: 6.4rem;
+  vertical-align: center;
+  line-height: 6.4rem;
+  text-align: center;
+}
+.time img {
+  height: 100%;
+}
+.recharge-con {
+  position: relative;
+  width: 25rem;
+  height: 31rem;
+  background-image: url(../img/playgame/recharge.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.closed {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: url(../img/playgame/closed.png) no-repeat;
+  background-size: 100% 100%;
+}
+.recharge-desc {
+  margin-top: 60%;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 3px;
+}
+.lavecoin {
+  color: rgb(255,185,43);
+}
+.recharge-btn {
+  margin-top: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+}
+.re-btn {
+  width: 10rem;
+  height: 4.6rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.btn-charge {
+  background-image: url(../img/playgame/charge.png);
+}
+.btn-giveup {
+  background-image: url(../img/playgame/giveup.png);
+}
+.capture-con {
+  position: relative;
+  width: 25rem;
+  height: 31rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.success-con {
+  background-image: url(../img/playgame/success.png)
+}
+.fail-con {
+  background-image: url(../img/playgame/fail.png)
+}
+.capture-btn {
+  position: absolute;
+  bottom: 3.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+}
+.cap-btn {
+  width: 10rem;
+  height: 4.6rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.onemore {
+  background-image: url(../img/playgame/onemore.png);
+}
+.relax {
+  background-image: url(../img/playgame/relax.png);
+}
+.cap-close {
+  position: absolute;
+  bottom: -5rem;
+  left: calc(50% - 2rem);
+  width: 4rem;
+  height: 4rem;
+  background-image: url(../img/playgame/close.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

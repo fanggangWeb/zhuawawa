@@ -1,0 +1,128 @@
+body,html{
+    font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+    font-size: 62.5%;
+    text-decoration: none;
+    height: 100%;
+}
+
+ul{
+    list-style-type: none;
+}
+.bg{
+    background-color: #f0f4ff;
+    height: 100%;
+}
+#header{
+  /* background: url("../img/pic_top_background.png"); */
+  background: white;
+  border-bottom: 0.1px solid #eee;
+}
+#header .avatar{
+    margin: 0 auto;
+    padding:2.5rem 0 2rem 0;
+ }
+#header .avatar img{
+    width: 9rem;
+    height: 9rem;
+}
+#detail{
+    background: #fff;
+}
+.my_doll,.my_coin,.my_bill,.my_collect,.my_coupons,.my_address,.my_opinion{
+    position: relative;
+    font-size: 1.4rem;
+    height: 4rem;
+    line-height: 4rem;
+    border-bottom: 0.1px solid #eee;
+    padding-left: 4.5rem;
+    padding-right: 2.8rem;
+}
+.icon_my_doll{
+    background: url(../img/icon_my_doll.png) no-repeat;
+    background-size: 100%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    left: 1.6rem;
+    top: 1.2rem;
+}
+.icon_my_coin{
+    background: url("../img/icon_my_coin.png") no-repeat;
+    background-size: 100%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    left: 1.6rem;
+    top: 1.2rem;
+}
+.icon_my_bill{
+    background: url("../img/icon_my_bill.png") no-repeat;
+    background-size: 100%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    left: 1.6rem;
+    top: 1.2rem;
+}
+.icon_expand{
+    background: url(../img/icon_expand.png) no-repeat;
+    background-size: 100%;
+    width: 0.8rem;
+    height: 1.6rem;
+    position: absolute;
+    right: 1rem;
+    top: 1.2rem;
+}
+.icon_my_collect{
+	background: url("../img/icon_my_collect.png") no-repeat;
+    background-size: 100%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    left: 1.6rem;
+    top: 1.2rem;
+}
+.icon_my_coupons{
+	background: url("../img/icon_my_coupons.png") no-repeat;
+    background-size: 100%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    left: 1.6rem;
+    top: 1.2rem;
+}
+.icon_my_address{
+	background: url("../img/icon_address.png") no-repeat;
+    background-size: 100%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    left: 1.6rem;
+    top: 1.2rem;
+}
+.icon_my_opinion{
+	background: url("../img/icon_opinion.png") no-repeat;
+    background-size: 100%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    left: 1.6rem;
+    top: 1.2rem;
+}
+.avatar>div{
+    font-size: 1.4rem;
+}
+.username{
+    margin-top: 1rem;
+}
+#controls{
+    font-size: 1.2rem;
+}
+#index_play img{
+    width: 30px;
+    height: 20px;
+}
+#index_mine img{
+    width: 20px;
+    height: 20px;
+}
