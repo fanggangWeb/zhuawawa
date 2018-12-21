@@ -66,7 +66,7 @@ const viewSwitch = async (data) => {
 
 //获取剩余金币数
 const getBalance = async () => {
-  return new Promise((resolve, reject) => processCrossAjax({
+  new Promise((resolve, reject) => processCrossAjax({
     type: 'post',
     url: _SG['apiPreUrl'] + '/home/selectUserBasicOnCount',
     contentType: "application/json;charset=UTF-8",
@@ -75,6 +75,7 @@ const getBalance = async () => {
         let res = rs.result;
         _SG.cache.setData('coinInfo', res);
         $('#balance').html(res[0].balance);
+        return (res[0].balance)
         // console.log(res[0].balance)
       } else {
         alert(rs.desc);
@@ -378,7 +379,7 @@ function after(i){
       break;
   }
   $('.time img').attr('src', pic)
-  i=i-1;
+  i=i-1
   if (i > -2) {
     setTimeout(function(){
       after(i);
@@ -386,7 +387,6 @@ function after(i){
   } else {
     $('.cutDown').hide()
   }
-  
 }
 
 // 关闭充值弹框
@@ -475,7 +475,7 @@ const startGame = async () => {
   }
 };
 // 判断金币是否足够
-const chargeMoney = function () {
+const chargeMoney = async function () {
   let balance = $('#balance').html();
   let consumption = _SG.cache.getData('consumption');
   return new Promise ((resolve, reject) => {
@@ -496,8 +496,8 @@ const startGrab = () => {
       url: _SG['apiPreUrl'] + '/machineOperating/startGrabDoll?mcId=' + id,
       contentType: "application/json;charset=UTF-8",
       success: (rs) => {
-        console.log('start')
-        console.log(rs);
+        // console.log('start')
+        // console.log(rs);
         if (_SG.isReplyOk(rs)) {
           resolve(rs);
         } else {
@@ -593,7 +593,7 @@ const closeMachine = function () {
       url: _SG['apiPreUrl'] + '/machineOperating/closeMachineOperation?mcId=' + id,
       contentType: "application/json;charset=UTF-8",
       success: async function (rs) {
-        console.log(rs);
+        // console.log(rs);
         let free = await isFree();
         if (free == 0) { //改为0
           $('#reserve,.playPanel').addClass('d-none')
@@ -677,6 +677,7 @@ $('.btn-right').on('click', async () => {
 
 $('.btn-go').on('click', async () => {
   $.showLoading("正在获取结果");
+  getBalance()
   await hookDown();
 });
 
@@ -738,14 +739,16 @@ ws.onmessage = function (evt) {
     rsData = null;
     return;
   }
-  // 此处需要修改，交互逻辑有问题
-  $('#ol_amount').html(rsData['online'] + '人');
-  let avatar = rsData['head'],
-    html = '';
-  $.each(avatar, (i, e) => {
-    html += '<img class="icon_top_avatar d-block rounded-circle " src="' + e + '"/>';
-  })
-  $('#ol_avatar').html(html);
+
+  if (rsData.online) {
+    $('#ol_amount').html(rsData['online'] + '人');
+    let avatar = rsData['head'],
+      html = '';
+    $.each(avatar, (i, e) => {
+      html += '<img class="icon_top_avatar d-block rounded-circle " src="' + e + '"/>';
+    })
+    $('#ol_avatar').html(html);
+  }
 };
 
 $(".collectwawa .isnot").click(function () {
@@ -757,7 +760,7 @@ $(".collectwawa .isnot").click(function () {
       success: (rs) => {
         if (_SG.isReplyOk(rs)) {
           resolve(rs);
-          alert("收藏成功");
+          $.toast("收藏成功");
           $(".collectwawa .isok").show();
           $(".collectwawa .isnot").hide();
         } else {
@@ -782,7 +785,7 @@ $(".collectwawa .isok").click(function () {
       success: (rs) => {
         if (_SG.isReplyOk(rs)) {
           resolve(rs);
-          alert("取消收藏成功");
+          $.toast("取消收藏成功");
           $(".collectwawa .isok").hide();
           $(".collectwawa .isnot").show();
         } else {

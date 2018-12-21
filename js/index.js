@@ -56,7 +56,7 @@ const selectMachine = function() {
 const getMachineInfos = function(subjectCategoryId){
    processCrossAjax({
         type: 'post',
-        url: _SG['apiPreUrl'] + '/home/selectMachineInfoList?num=1&size=10&subjectCategoryId=' + subjectCategoryId,
+        url: _SG['apiPreUrl'] + '/home/selectMachineInfoList?num=1&size=1000&subjectCategoryId=' + subjectCategoryId,
         contentType: "application/json;charset=UTF-8",
         success: function (rs) {
             let html = '';

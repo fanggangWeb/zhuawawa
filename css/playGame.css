@@ -410,9 +410,9 @@ html {
 .torecord {
   position: absolute;
   right: 1rem;
-  top: 13rem;
+  top: 16rem;
   z-index: 1;
-  width: 3rem;
+  width: 4rem;
   height: 3rem;
 }
 .torecord img {
@@ -424,7 +424,7 @@ html {
   position: absolute;
   top: 8rem;
   right: 1rem;
-  width: 50px;
+  width: 60px;
   text-align: center;
   z-index: 9;
 }

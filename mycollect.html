@@ -14,7 +14,7 @@
 </head>
 <body style="background: #f6f6f6;">
 	<div id="mycollect">
-		<div class="weui-cell collectlist" v-for="(item,index) in mycollectlist">
+		<div class="weui-cell collectlist" v-if="mycollectlist.length>0" v-for="(item,index) in mycollectlist">
 			<div class="weui-cell__hd" @click="toplayGame(item.businessId)">
 				<img :src="item.realFilePath" />
 			</div>
@@ -26,7 +26,11 @@
 				</div>
 			</div>
 			<div class="weui-cell__ft" @click="cancelselect(item.businessId,index)">取消收藏</div>
-		</div>
+    </div>
+    <div class="nodata-container" v-if="mycollectlist.length==0">
+      <img class="nodata-img" src="./img/nodata.png" alt="">
+      <div class="nodata-text">暂无数据</div>
+    </div>
 	</div>
 <script src="lib/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="js/vue.js" ></script>
@@ -50,7 +54,7 @@
 			            contentType: "application/json;charset=UTF-8",
 			            success: (rs) => {
 			                if (_SG.isReplyOk(rs)) {
-			                    alert("取消收藏成功");
+			                    $.toast("取消收藏成功");
 			                    vm.mycollectlist.splice(index,1);
 			                } else {
 			                    alert(rs.desc);
@@ -69,7 +73,7 @@
 				    url:_SG['apiPreUrl']+'/collection/collectionList?num=1&size=100&collectionType=2',
 				    contentType:"application/json;charset=UTF-8",
 				    success:function (rs) {
-				        console.log(rs,1111);
+				        // console.log(rs,1111);
 				        if(_SG.isReplyOk(rs)){
 				        	for(var i=0;i<rs.result.list.length;i++){
 				        		rs.result.list[i].realFilePath = rs.result.list[i].realFilePath;

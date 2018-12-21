@@ -1,61 +1,137 @@
-*{
-    margin: 0;
-    padding: 0;
-    border: 0;
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
-html,body{
-    font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
-    font-size: 62.5%;
-    text-decoration: none;
-    height: 100%;
+
+html,
+body {
+  font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+  font-size: 62.5%;
+  text-decoration: none;
+  height: 100%;
 }
-.content-even{
-    justify-content: space-evenly;
+
+/* 导航栏 */
+.nav-con {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  background-color: white;
+  font-size: 1.2rem;
 }
-.rounded-3{
-    border-radius: 3px;
+.nav-item {
+  padding: 0 5px;
+  line-height: 40px;
+  text-align: center;
+  margin-left: 0px;
+  color: rgba(0,0,0,0.5)
 }
-.rounded-top-3{
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+.nav-item.active {
+  color: red;
+  border-bottom: red 1px solid;
 }
-.bg{
-    background: #f0f4ff;
-    height: 100%;
+.checkbox {
+  height: 30px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border-radius: 15px;
+  background: #fd9202;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  margin-left: auto;
+  margin-right: 5px;
 }
-.dolls_amount{
-    background: #fff;
-    font-size: 1.2rem;
-    padding: 1rem;
+/* 复选框的位置 */
+.weui-check__label {
+  margin-bottom: 0px !important;
+  padding: 0px;
+  background: transparent;
+  position: absolute;
+  top: 10px;
+  right: 0px;
 }
-.icon_catch{
-    width: 1.6rem;
-    margin: 0 0.4rem;
+.weui-cells_checkbox .weui-icon-checked:before {
+  color: #09bb07;
 }
-.catch_detail{
-    margin-left: 1rem;
-    flex:1;
+.content-even {
+  justify-content: space-evenly;
 }
-.icon_coin{
-    width:1.3rem;
-    height: 1.3rem;
+
+.rounded-3 {
+  border-radius: 3px;
 }
-.my_dolls{
-    margin-top: 0.8rem;
+
+.rounded-top-3 {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
-.doll{
-    width: 45%;
-    background: #fff;
-    margin-top: 0.8rem;
-    font-size: 1.2rem;
+
+.bg {
+  background: #f0f4ff;
+  height: 100%;
 }
-.doll_info{
-    padding: 0.5rem;
+
+.dolls_amount {
+  background: #fff;
+  font-size: 1.2rem;
+  padding: 1rem;
 }
-.unit_price{
-    color:#fd9202;
-    margin-left: 0.3rem;
+
+.icon_catch {
+  width: 1.6rem;
+  margin: 0 0.4rem;
 }
-.deliver_status{
-    color: #ccc;
+
+.catch_detail {
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.icon_coin {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.my_dolls {
+  margin-top: 0.8rem;
+}
+
+.doll {
+  width: 45%;
+  background: #fff;
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.doll_info {
+  padding: 0.5rem;
+}
+
+.unit_price {
+  color: #fd9202;
+  margin-left: 0.3rem;
+}
+
+.deliver_status {
+  color: #ccc;
+}
+/* 请求发货按钮 */
+.send-btn {
+  width: 160px;
+  height: 35px;
+  font-size: 1.4rem;
+  line-height: 35px;
+  position: fixed;
+  left: calc(50% - 80px);
+  bottom: 40px;
+  color: white;
+  background: #e64340;
+  letter-spacing: 2px;
+  text-align: center;
+  border-radius: 20px;
+  display: none;
 }

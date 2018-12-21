@@ -1,6 +1,6 @@
 .weui-toast{
   width: 12em !important;
-  padding: 0 10px !important;
+  padding: 0 10px 10px 10px  !important;
   font-size: 1.4rem !important;
   letter-spacing: 1px;
 }
@@ -12,6 +12,25 @@
 html,body {
   font-size: 62.5% !important;
 }
-.weui-pull-to-refresh__layer {
-  height: 50px !important;
+
+/* 暂无数据显示图 */
+.nodata-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 13rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.nodata-img {
+  width: 5rem;
+  height: 6rem;
+}
+.nodata-text {
+  width: 100%;
+  text-align: center;
+  color: #696969;
+  font-size: 1.2rem;
+  margin-top: 2rem;
 }

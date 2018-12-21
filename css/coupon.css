@@ -114,3 +114,24 @@ a:active{
   align-items:flex-start;
   -webkit-align-items:flex-start;
 }
+/* 暂无数据显示图 */
+.nodata-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 13rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.nodata-img {
+  width: 5rem;
+  height: 6rem;
+}
+.nodata-text {
+  width: 100%;
+  text-align: center;
+  color: #696969;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}

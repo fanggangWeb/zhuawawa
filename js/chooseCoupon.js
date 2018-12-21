@@ -49,7 +49,13 @@ $(function () {
               $('.coupon-list').html(html)
             });
           } else {
-            $('.coupon-list').html('')
+            const html = `
+            <div class="nodata-container">
+              <img class="nodata-img" src="./img/nodata.png" alt="">
+              <div class="nodata-text">暂无数据</div>
+            </div>
+            `
+            $('.coupon-list').html(html)
           }
         } else {
           alert(rs.desc);

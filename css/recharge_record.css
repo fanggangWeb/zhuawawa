@@ -19,6 +19,8 @@ body,html{
 }
 .number {
   color: rgb(230,251,98);
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 .name {
   color: white;
