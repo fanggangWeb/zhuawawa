@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>邮寄填写</title>
+  <link rel="stylesheet" href="css/weui.css" />
+  <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.css">
+  <link rel="stylesheet" href="./css/common.css">
+</head>
+<body style="background: #f6f6f6;">
+  <div id="container">
+    <div id="index_banner">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="(item, index) in wawaList" :key="index">
+            <img :src="item.commodityPicId" alt="">
+          </div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+    <div class="desc">
+      <div class="desc-name">{{wawaList[0].commodityName}}</div>
+      <div class="desc-value">{{wawaList[0].isSend}}</div>
+    </div>
+    <div class="desc"  v-if="showState">
+      <div class="desc-name">订单号</div>
+      <div class="desc-value">{{wawaList[0].orderId}}</div>
+    </div>
+    <div class="desc">
+      <div class="desc-name">运费</div>
+      <div class="desc-value">{{wawaList[0].expressPrice}}</div>
+    </div>
+    <div class="desc"  v-if="showState">
+      <div class="desc-name">物流号</div>
+      <div class="desc-value">{{wawaList[0].expressCode}}</div>
+    </div>
+    <div class="desc"  v-if="showState">
+      <div class="desc-name">物流公司</div>
+      <div class="desc-value">{{wawaList[0].courierCompany}}</div>
+    </div>
+    <div class="confirm-btn" @click="confirm" v-if="btnstate1">确认收货</div>
+    <div class="send-btn" @click="toDelivery" v-if="btnState2"> 请求发货 </div>
+    <div class="pay-btn" v-if="btnState3">
+      <div class="del" @click="delDelivery">删除</div>
+      <div class="topay">立即支付</div>
+    </div>
+  </div>
+  <script src="lib/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="js/vue.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
+  <script src="js/_common.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      let address = JSON.parse(sessionStorage.getItem('addressData'))
+      let wawaList = JSON.parse(sessionStorage.getItem('sendData'))
+      var vm = new Vue({
+        el: "#container",
+        data() {
+          return {
+            wawaList: wawaList,
+            address: address,
+            expressfee: '',
+            remark: '',
+            btnState2: false,
+            btnstate1: false,
+            showState: false,
+            btnState3: false
+          }
+        },
+        methods: {
+          chooseAdd() {
+            let id = _SG['user'].getInfo().id;
+            sessionStorage.setItem('chooseAddType', 1)
+            location.href = "./addresslist.html?id=" + id
+          },
+          delDelivery () {
+            $.confirm("确定要删除发货订单吗？", function() {
+            //点击确认后的回调函数
+              const data = {
+                id: wawaList[0].orderId
+              }
+              processCrossAjax({
+                type: 'post',
+                url: _SG['apiPreUrl'] + '/delivery/deleteDeliveryById',
+                data: data,
+                // contentType: "application/json;charset=UTF-8",
+                success: function (rs) {
+                  if (_SG.isReplyOk(rs)) {
+                    $.toast(rs.desc)
+                    location.href = 'my_collection.js'
+                  } else {
+                    $.alert(rs.desc)
+                  }
+                },
+                error: function (error) {
+                  console.log(error)
+                }
+              })
+            }, function() {
+            });
+          },
+          confirm () {
+            $.confirm("确定已经收到娃娃吗？", function() {
+            //点击确认后的回调函数
+              const data = {
+                id: wawaList[0].orderId
+              }
+              processCrossAjax({
+                type: 'post',
+                url: _SG['apiPreUrl'] + '/delivery/confirmationReceipt',
+                data: data,
+                // contentType: "application/json;charset=UTF-8",
+                success: function (rs) {
+                  if (_SG.isReplyOk(rs)) {
+                    $.toast(rs.desc)
+                    location.href = 'my_collection.js'
+                  } else {
+                    $.alert(rs.desc)
+                  }
+                },
+                error: function (error) {
+                  console.log(error)
+                }
+              })
+            }, function() {
+            //点击取消后的回调函数
+            });
+          },
+          judgeState () {
+            const sendState = wawaList[0].isChange
+            switch (sendState) {
+              case 0: // 未申请
+                this.btnState2 = true
+                break;
+              case 6: // 待支付
+                this.btnState3 = true
+                break;
+              case 4: // 待发货
+                break;
+              case 1: // 已发货
+                this.showState = true
+                this.btnstate1 = true
+                break;
+              case 5: // 已收货
+                this.showState = true
+                break;
+              case 2: // 已兑换,移动端无兑换
+                break;
+              default:
+                break;
+            }
+          },
+          getExpressPrice() {
+            let expressfee = 0
+            for (let i = 0; i < this.wawaList.length; i++) {
+              expressfee += this.wawaList[i].expressPrice
+            }
+            this.expressfee = expressfee
+          },
+          toDelivery () {
+            location.href = "./sendwawa.html"
+          }
+        },
+        created() {
+          // setSwiper()
+          // this.getExpressPrice()
+          this.judgeState()
+        }
+      })
+      function setSwiper () {
+        var mySwiper = new Swiper('.swiper-container', {
+          direction: 'horizontal', // 垂直切换选项
+          loop: true, // 循环模式选项
+          observer: true,
+          observeParents: true,
+          slidesPerview: 'auto',
+          autoplay: {
+            disableOnInteraction: false, //默认true
+            delay: 3000, //默认3000
+          },
+          autoplayDisableOnInteraction: false,
+          speed: 500,
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination',
+          },
+          // 如果需要前进后退按钮
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          // 如果需要滚动条
+          scrollbar: {
+            el: '.swiper-scrollbar',
+          },
+        })
+      }
+      setSwiper()
+    })
+    
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    html, body {
+      font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+      text-decoration: none;
+      height: 100%;
+    }
+    #container {
+      width: 100%;
+      height: 100%;
+      background: rgb(243, 243, 243);
+    }
+    #index_banner,
+    .swiper-container {
+      height: 18rem;
+    }
+    .swiper-wrapper img {
+      width: 100%;
+      height: 100%;
+    }
+    .desc {
+      width: 100%;
+      height: 4rem;
+      background: white;
+      display: flex;
+      font-size: 1.3rem;
+      align-items: center;
+      -webkit-align-items: center;
+      box-sizing: border-box;
+      padding: 0 1rem;
+      border-bottom: 1px solid rgb(243, 243, 243);
+    }
+    .send-fee {
+      color: #e64340;
+    }
+    .desc-value {
+      margin-left: auto;
+      /* color: #fd9202; */
+      color: #ccc;
+    }
+    /* 确认收获按钮 */
+    .confirm-btn {
+      width: 120px;
+      height: 3.5rem;
+      margin-left: calc(50% - 60px);
+      color: white;
+      line-height: 3.5rem;
+      text-align: center;
+      font-size: 1.4rem;
+      background: rgb(235,38,91);
+      border-radius: 10px;
+      margin-top: 2.5rem;
+    }
+    /* 请求发货按钮 */
+    .send-btn {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 5rem;
+      font-size: 1.8rem;
+      line-height: 5rem;
+      color: white;
+      background: rgb(235,38,91);
+      letter-spacing: 1px;
+      text-align: center;
+      z-index: 1;
+    }
+    .pay-btn {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 5rem;
+      font-size: 1.8rem;
+      line-height: 5rem;
+      color: white;
+      background: rgb(235,38,91);
+      letter-spacing: 1px;
+      text-align: center;
+      z-index: 1;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    .del {
+      flex: 1;
+    }
+    .topay {
+      flex: 1;
+      background: rgb(238, 69, 110)
+    }
+  </style>
+</body>
+
+</html>

@@ -9,12 +9,12 @@ localStorage.setItem('userInfo', JSON.stringify({
     "isInvite": "0",
     "nickName": "暂时想不出来",
     "showId": "ofsocfmd",
-    "signInDay": 1544544000000,
-    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDUzNTUyNDYsInN1YiI6IntcIm5pY2tOYW1lXCI6XCLmmoLml7bmg7PkuI3lh7rmnaVcIixcInVzZXJOYW1lXCI6XCLmipPlqIPlqIM5MjI5NjRcIixcInVzZXJJZFwiOlwiZjZkZjBmMDZkNTk2NGQ3Yjg1MTc2Njc4ODNmMTljNmRcIn0iLCJleHAiOjE1NDc0Mjg4NDYsIm5iZiI6MTU0NTM1NTI0Nn0.l9QqUVfdy1tjaDIGpvwa3wTtlBsE__cRCauwvdJbKqI",
+    "signInDay": 1545667200000,
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDU3MjU0MzcsInN1YiI6IntcIm5pY2tOYW1lXCI6XCLmmoLml7bmg7PkuI3lh7rmnaVcIixcInVzZXJOYW1lXCI6XCLmipPlqIPlqIM5MjI5NjRcIixcInVzZXJJZFwiOlwiZjZkZjBmMDZkNTk2NGQ3Yjg1MTc2Njc4ODNmMTljNmRcIn0iLCJleHAiOjE1NDc3OTkwMzcsIm5iZiI6MTU0NTcyNTQzN30.-ZH5nAXTD1vuzmtSSJoZJR-wKLO4W01lCdLH5AxvrhM",
     "userName": "抓娃娃922964",
     "userStyle": "1",
     "wheadImgPath": "http://thirdwx.qlogo.cn/mmopen/vi_32/Iol74jr4tE6dWteunxgyrZvlgRwsM24ic8x5pXIGib8q0FTNrspsoBt3J8dyJoF1hgN1Q2w3fxFl2FKYicAOg00eQ/132"
-  }    
+  }          
 }))
 //登录
 var gettoken = _SG['user'].getInfo();

@@ -1,165 +1,247 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
-    <title>收货地址</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
-    <link rel="stylesheet" href="css/weui.css" />
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="css/addresslist.css" />
-    <style type="text/css">
-		
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+  <title>收货地址</title>
+ 
+  <link rel="stylesheet" href="css/weui.css" />
+  <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="css/addresslist.css" />
+  <style type="text/css">
+
+  </style>
 </head>
+
 <body style="background: #F2F4F4;">
-<div id="addresslistdata">
-	<div v-show="addresslist.length<1" class="buycar-nogoods">
-        <img src="img/noaddress.png"/>
+  <div id="addresslistdata">
+    <div v-show="addresslist.length<1" class="buycar-nogoods">
+      <img src="img/noaddress.png" />
     </div>
-	<div v-show="addresslist.length>0" v-for="(item,index) in addresslist" class="weui-cells">
-        <div class="weui-cell addresslist-personmsg" @click="toedit(item.id)">
-            <div class="weui-cell__bd" >{{item.userName}}</div>
-            <div class="weui-cell__ft">{{item.contactNumber}}</div>
+    <div v-show="addresslist.length>0" v-for="(item,index) in addresslist" class="weui-cells">
+      <div class="weui-cell addresslist-personmsg"  @click="chooseAdd(item)">
+        <div class="weui-cell__bd">{{item.userName}}</div>
+        <div class="weui-cell__ft">{{item.contactNumber}}</div>
+      </div>
+      <div class="addresslist-address"  @click="chooseAdd(item)">{{item.addressDetail}}</div>
+      <div class="weui-cell weui-cells_checkbox addresslist-set">
+        <div class="weui-cell__bd">
+          <label class="weui-check__label" style="padding: 3px 0;">
+            <input type="checkbox" @click="setdefault(index)" name="addressdefault" v-model="item.isDefaultAddress"
+              class="weui-check" />
+            <i class="weui-icon-checked"></i>
+            设为默认
+          </label>
         </div>
-        <div class="addresslist-address" @click="toedit(item.id)">{{item.addressDetail}}</div>
-        <div class="weui-cell weui-cells_checkbox addresslist-set">
-            <div class="weui-cell__bd">
-                <label class="weui-check__label"  style="padding: 3px 0;">
-                    <input type="checkbox" @click="setdefault(index)" name="addressdefault" v-model="item.isDefaultAddress" class="weui-check"/>
-                    <i class="weui-icon-checked"></i>
-                    设为默认
-                </label>
-            </div>
-            <div class="weui-cell__ft"><div style="float: right;display: flex;align-items: center;justify-content: center;" @click="showtanchuang"><img src="img/delete1.png"/>删除</div><div style="margin-right: 25px;float: right;display: flex;align-items: center;justify-content: center;" @click="toedit(item.id)"><img src="img/edit.png">编辑</div></div>
+        <div class="weui-cell__ft">
+          <div style="float: right;display: flex;align-items: center;justify-content: center;" @click="hidetanchuang(1)"><img
+              src="img/delete1.png" />删除</div>
+          <div style="margin-right: 25px;float: right;display: flex;align-items: center;justify-content: center;"
+            @click="toedit(item.id)"><img src="img/edit.png">编辑</div>
         </div>
+      </div>
     </div>
     <div class="addresslist-add" @click="toedit(-1)">新增收货地址</div>
-    <div class="js_dialog" :class="{'showajax':isshowtanchuang,'hideajax':!isshowtanchuang}">
-        <div class="weui-mask" @click="hidetanchuang(2)"></div>
-        <div class="weui-dialog">
-            <div class="weui-dialog__bd" style="font-size: 14px;color: #666666;">您确定要删除该地址么</div>
-            <div class="weui-dialog__ft">
-                <a href="javascript:;"
-                   class="weui-dialog__btn weui-dialog__btn_default" style="font-size: 14px;
-color: #666666;" @click="hidetanchuang(1)">确定</a>
-                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" style="font-size: 14px;
-color: #FFFFFF;background: #FE463C;" @click="hidetanchuang(2)">取消</a>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="lib/jquery-3.3.1.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
-<script type="text/javascript" src="js/vue.js" ></script>
-<script src="js/_common.js"></script>
-<script type="text/javascript">
-    $(function(){
-    	var id = getParamFromUrl('id');
-        var windowwidth = $("body").width();
-        var proportion = windowwidth/375;
-        var windowHeight = $("body").height();
-        var spanwidth = $(".goodsdetail-goodsmsg-marketvalue span").width();
-        var vm = new Vue({
-            el:"#addresslistdata",
-            data: {
-                windowwidth:windowwidth,
-                windowHeight:windowHeight,
-                proportion:proportion,
-                isshowtanchuang:false,
-                addresslist:[],
-                indexdelete:0
-            },
-            methods:{
-				hidetanchuang: function (type) {
-	                if(type==1){
-	                    this.deleteaddress();
-	                }else{
-	                	this.isshowtanchuang = false;
-	                }
-	            },
-	            showtanchuang: function () {
-	                this.isshowtanchuang = true;
-	            },
-	            toedit:function(adid){
-	            	if(adid==-1){
-	            		location.href = 'editaddress.html';
-	            	}else{
-	            		location.href = 'editaddress.html?id='+adid;
-	            	}
-	            },
-	            deleteaddress:function(){
-	            	processCrossAjax({
-					    type:'post',
-					    url:_SG['apiPreUrl']+'/address/deleteUserAddress?ids='+this.addresslist[this.indexdelete].id,
-					    contentType:"application/json;charset=UTF-8",
-					    success:function (rs) {
-					        if(_SG.isReplyOk(rs)){
-					        	vm.addresslist.splice(this.indexdelete,1);
-					        	vm.isshowtanchuang = false;
-					        }
-					    }
-					})
-	            },
-	            setdefault:function(index){
-	            	for(var i=0;i<this.addresslist.length;i++){
-		        		this.addresslist[i].isDefaultAddress = false;
-		        	}
-	            	processCrossAjax({
-					    type:'post',
-					    url:_SG['apiPreUrl']+'/address/settingDefaultAddressById?id='+this.addresslist[index].id,
-					    contentType:"application/json;charset=UTF-8",
-					    success:function (rs) {
-					        if(_SG.isReplyOk(rs)){
-					        	processCrossAjax({
-								    type:'post',
-								    url:_SG['apiPreUrl']+'/address/receivingAddressListById?num=1&size=100&userId='+id,
-								    contentType:"application/json;charset=UTF-8",
-								    success:function (rs) {
-								        if(_SG.isReplyOk(rs)){
-								        	for(var i=0;i<rs.result.list.length;i++){
-								        		if(rs.result.list[i].isDefaultAddress==0){
-								        			rs.result.list[i].isDefaultAddress = false;
-								        		}else if(rs.result.list[i].isDefaultAddress==1){
-								        			rs.result.list[i].isDefaultAddress = true;
-								        		}
-								        	}
-								        	vm.addresslist = rs.result.list;
-								        }
-								    }
-								})
-					        }
-					    }
-					})
-	            }
-           },
-           created:function(){
-           		processCrossAjax({
-				    type:'post',
-				    url:_SG['apiPreUrl']+'/address/receivingAddressListById?num=1&size=100&userId='+id,
-				    contentType:"application/json;charset=UTF-8",
-				    success:function (rs) {
-				        if(_SG.isReplyOk(rs)){
-				        	for(var i=0;i<rs.result.list.length;i++){
-				        		if(rs.result.list[i].isDefaultAddress==0){
-				        			rs.result.list[i].isDefaultAddress = false;
-				        		}else if(rs.result.list[i].isDefaultAddress==1){
-				        			rs.result.list[i].isDefaultAddress = true;
-				        		}
-				        	}
-				        	vm.addresslist = rs.result.list;
-				        }
-				    }
-				})
-           }
-        })
+  </div>
+  <script src="lib/jquery-3.3.1.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="js/vue.js"></script>
+  <script src="js/_common.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      var id = getParamFromUrl('id');
+      let chooseAddType = sessionStorage.getItem('chooseAddType') // true为选择地址直接跳回寄娃娃的页面
+      var windowwidth = $("body").width();
+      var proportion = windowwidth / 375;
+      var windowHeight = $("body").height();
+      var spanwidth = $(".goodsdetail-goodsmsg-marketvalue span").width();
+      var vm = new Vue({
+        el: "#addresslistdata",
+        data: {
+          windowwidth: windowwidth,
+          windowHeight: windowHeight,
+          proportion: proportion,
+          addresslist: [],
+          indexdelete: 0
+        },
+        methods: {
+          hidetanchuang: function (type) {
+            let vm = this
+            if (type == 1) {
+              $.confirm("确定要删除该条数据吗", function () {
+                vm.deleteaddress()
+              }, function () {
+                return false
+              });
+            } else {}
+          },
+          chooseAdd(item) {
+            if (chooseAddType == 1) {
+              console.log(item)
+              sessionStorage.setItem('addressData',JSON.stringify(item))
+              location.href = 'sendwawa.html'
+            }
+          },
+          showtanchuang: function () {
+          },
+          toedit: function (adid) {
+            if (adid == -1) {
+              location.href = 'editaddress.html';
+            } else {
+              location.href = 'editaddress.html?id=' + adid;
+            }
+          },
+          deleteaddress: function () {
+            processCrossAjax({
+              type: 'post',
+              url: _SG['apiPreUrl'] + '/address/deleteUserAddress?ids=' + this.addresslist[this.indexdelete]
+                .id,
+              contentType: "application/json;charset=UTF-8",
+              success: function (rs) {
+                if (_SG.isReplyOk(rs)) {
+                  vm.addresslist.splice(this.indexdelete, 1);
+                  $.toast(rs.desc)
+                }
+              }
+            })
+          },
+          setdefault: function (index) {
+            for (var i = 0; i < this.addresslist.length; i++) {
+              this.addresslist[i].isDefaultAddress = false;
+            }
+            processCrossAjax({
+              type: 'post',
+              url: _SG['apiPreUrl'] + '/address/settingDefaultAddressById?id=' + this.addresslist[index].id,
+              contentType: "application/json;charset=UTF-8",
+              success: function (rs) {
+                if (_SG.isReplyOk(rs)) {
+                  processCrossAjax({
+                    type: 'post',
+                    url: _SG['apiPreUrl'] +
+                      '/address/receivingAddressListById?num=1&size=100&userId=' + id,
+                    contentType: "application/json;charset=UTF-8",
+                    success: function (rs) {
+                      if (_SG.isReplyOk(rs)) {
+                        for (var i = 0; i < rs.result.list.length; i++) {
+                          if (rs.result.list[i].isDefaultAddress == 0) {
+                            rs.result.list[i].isDefaultAddress = false;
+                          } else if (rs.result.list[i].isDefaultAddress == 1) {
+                            rs.result.list[i].isDefaultAddress = true;
+                          }
+                        }
+                        vm.addresslist = rs.result.list;
+                      }
+                    }
+                  })
+                }
+              }
+            })
+          }
+        },
+        created: function () {
+          processCrossAjax({
+            type: 'post',
+            url: _SG['apiPreUrl'] + '/address/receivingAddressListById?num=1&size=100&userId=' + id,
+            contentType: "application/json;charset=UTF-8",
+            success: function (rs) {
+              if (_SG.isReplyOk(rs)) {
+                for (var i = 0; i < rs.result.list.length; i++) {
+                  if (rs.result.list[i].isDefaultAddress == 0) {
+                    rs.result.list[i].isDefaultAddress = false;
+                  } else if (rs.result.list[i].isDefaultAddress == 1) {
+                    rs.result.list[i].isDefaultAddress = true;
+                  }
+                }
+                vm.addresslist = rs.result.list;
+              }
+            }
+          })
+        }
+      })
     })
-</script>
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    html, body {
+      font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
+      font-size: 62.5%;
+      text-decoration: none;
+      height: 100%;
+    }
+    .weui-cells {
+      margin-top: 0.5rem;
+    }
+    .buycar-nogoods {
+      padding-top: 10rem;
+    }
+    .buycar-nogoods img {
+      width: 8.5rem;
+      display: block;
+      margin: auto;
+    }
+    .addresslist-personmsg {
+      padding: 1.4rem 1.4rem 0.5rem !important;
+    }
+    .addresslist-personmsg .weui-cell__bd {
+      font-size: 1.4rem;
+      color: #333333;
+    }
+    .addresslist-personmsg .weui-cell__ft {
+      font-size: 1.4rem;
+      color: #333333;
+    }
+    .addresslist-address {
+      font-size: 1.4rem;
+      color: #999999;
+      margin-top: 0.25rem;
+      padding: 0 0.75rem 0.8rem;
+      border-bottom: 1px solid #dddddd;
+    }
+    .addresslist-set .weui-cell__bd {
+      font-size: 1.4rem;
+      color: #333333;
+    }
+    .addresslist-set .weui-cell__ft {
+      font-size: 1.4rem;
+      color: #333333;
+    }
+    .addresslist-set .weui-cell__ft img {
+      width: 1rem;
+      margin-right: 0.3rem;
+    }
+    .addresslist-add {
+      margin: auto;
+      margin-top: 1.5rem;
+      margin-bottom: 2.5rem;
+      width: 9rem;
+      height: 3rem;
+      line-height: 3rem;
+      text-align: center;
+      font-size: 1.4rem;
+      color: #FFA400;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      border-radius: 8px;
+      border: 1px solid #FFA400;
+    }
+    .showajax {
+      opacity: 1;
+    }
+    .hideajax {
+      opacity: 0;
+      display: none;
+    }
+  </style>
 </body>
+
 </html>
-
-

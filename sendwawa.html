@@ -14,15 +14,40 @@
 </head>
 
 <body style="background: #f6f6f6;">
-  <div id="detail">
-    <div id="banner">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
+  <div id="container">
+    <div class="wawalist" v-for="(item, index) in wawaList" :key="index">
+      <div class="wawa">
+        <div class="wawa-left">
+          <img :src="item.commodityPicId" alt="">
         </div>
-        <!-- 如果需要分页器 -->
-        <div class="swiper-pagination"></div>
+        <div class="wawa-right">
+          <div class="wawa-name">{{item.commodityName}}</div>
+          <div class="wawa-state">{{item.isSend}}</div>
+        </div>
       </div>
     </div>
+    <div class="send-address">
+      <div class="add-text">请选择收货地址</div>
+      <div class="choose-address" @click="chooseAdd">
+        <div class="add-icon">
+          <img src="./img/sendwawa/address.png" alt="">
+        </div>
+        <div class="add-center" v-if="address">{{address.addressDetail}}</div>
+        <div class="add-center" v-else>点击添加</div>
+        <div class="add-arrow">></div>
+      </div>
+    </div>
+    <div class="weui-cell remark">
+      <div class="weui-cell__bd">
+        <input class="weui-input" v-model="remark" type="text" placeholder="备注">
+      </div>
+    </div>
+    <div class="send-cost">
+      <div class="send-text">邮寄费用</div>
+      <div class="send-fee" v-if="expressfee == 0">包邮</div>
+      <div class="send-fee" v-else>￥{{expressfee}}</div>
+    </div>
+    <div class="send-btn" @click="creatDelivery">确认下单并支付</div>
   </div>
   <script src="lib/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="js/vue.js"></script>
@@ -31,13 +56,61 @@
   <script src="js/_common.js"></script>
   <script type="text/javascript">
     $(function () {
+      let address = JSON.parse(sessionStorage.getItem('addressData'))
+      let wawaList = JSON.parse(sessionStorage.getItem('sendData'))
       var vm = new Vue({
-        el: "#detail",
+        el: "#container",
         data: {
+          wawaList: wawaList,
+          address: address,
+          expressfee: '',
+          remark: ''
         },
         methods: {
+          chooseAdd() {
+            let id = _SG['user'].getInfo().id;
+            sessionStorage.setItem('chooseAddType', 1)
+            location.href = "./addresslist.html?id=" + id
+          },
+          getExpressPrice() {
+            let expressfee = 0
+            for (let i = 0; i < this.wawaList.length; i++) {
+              expressfee += this.wawaList[i].expressPrice
+            }
+            this.expressfee = expressfee
+          },
+          // 申请发货
+          creatDelivery() {
+            let commodityId = []
+            this.wawaList.forEach(e=> {
+              commodityId.push(e.id)
+            })
+            commodityId = commodityId.toString()
+            const data = {
+              catchRecordId: commodityId,
+              addressId: address.id,
+              expressPrice: this.expressfee,
+              orderType: 1, // 订单类型【1：发货 2：换积分】
+            }
+            processCrossAjax({
+              type: 'post',
+              url: _SG['apiPreUrl'] + '/delivery/creatDelivery',
+              data: data,
+              // contentType: "application/json;charset=UTF-8",
+              success: function (rs) {
+                if (_SG.isReplyOk(rs)) {
+                } else {
+                  $.alert(rs.desc)
+                }
+              },
+              error: function (error) {
+                console.log(error)
+              }
+            })
+          }
         },
-        created () {
+        created() {
+          this.getExpressPrice()
         }
       })
     })
@@ -48,11 +121,127 @@
       padding: 0;
       border: 0;
     }
-    html, body {
+    html,
+    body {
       font-family: "Microsoft Yahei", Arial, Verdana, Helvetica, sans-serif;
       font-size: 62.5%;
       text-decoration: none;
       height: 100%;
+    }
+    #container {
+      width: 100%;
+      height: 100%;
+      background: rgb(243, 243, 243);
+    }
+    .wawalist {
+      width: 100%;
+      background: rgb(243, 243, 243);
+    }
+    .wawa {
+      width: 100%;
+      height: 10rem;
+      background: white;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      border-bottom: 1px solid rgb(243, 243, 243);
+    }
+    .wawa-left {
+      padding: 1rem;
+      width: 8rem;
+      height: 8rem;
+    }
+    .wawa-left img {
+      width: 100%;
+      height: 100%;
+    }
+    .wawa-right {
+      box-sizing: border-box;
+      height: 100%;
+      width: calc(100% - 10rem);
+      padding: 2rem 1rem;
+    }
+    .wawa-name {
+      color: #fd9202;
+      font-size: 1.4rem;
+    }
+    .wawa-state {
+      color: #ccc;
+      font-size: 1.4rem;
+      margin-top: 2rem;
+    }
+    .send-address {
+      box-sizing: border-box;
+      width: 100%;
+      height: 8rem;
+      padding: 1.2rem 1rem;
+      background: white;
+      margin-top: 1rem;
+      font-size: 1.4rem;
+    }
+    .add-text {
+      height: 2rem;
+      line-height: 2rem;
+    }
+    .choose-address {
+      height: 3rem;
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      -webkit-align-items: center;
+    }
+    .add-icon {
+      width: 2rem;
+      height: 2.3rem;
+    }
+    .add-icon img {
+      width: 100%;
+      height: 100%;
+    }
+    .add-center {
+      padding-left: 1rem;
+      color: #ccc;
+    }
+    .add-arrow {
+      font-size: 2rem;
+      margin-left: auto;
+    }
+    .remark {
+      margin-top: 1rem;
+      background: white;
+      height: 3rem;
+      font-size: 1.4rem;
+    }
+    .send-cost {
+      margin-top: 1rem;
+      width: 100%;
+      height: 4rem;
+      display: flex;
+      box-sizing: border-box;
+      padding: 0 1rem;
+      align-items: center;
+      -webkit-align-items: center;
+      font-size: 1.4rem;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      background: white;
+    }
+    .send-fee {
+      color: #e64340;
+    }
+    /* 请求发货按钮 */
+    .send-btn {
+      width: 160px;
+      height: 35px;
+      margin-top: 3rem;
+      margin-left: calc(50% - 80px);
+      font-size: 1.4rem;
+      line-height: 35px;
+      color: white;
+      background: #e64340;
+      letter-spacing: 1px;
+      text-align: center;
+      border-radius: 20px;
     }
   </style>
 </body>

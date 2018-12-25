@@ -59,7 +59,8 @@ processCrossAjax({
 			    location.href = 'mycollect.html';
 			});
 			$('.my_address').on('click', function () {
-			    location.href = 'addresslist.html?id='+id;
+        sessionStorage.setItem('chooseAddType', 0)
+			  location.href = 'addresslist.html?id='+id;
 			});
 			$('.my_opinion').on('click', function () {
 			    location.href = 'feedback.html';
